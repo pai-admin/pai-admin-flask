@@ -1,0 +1,10 @@
+flask
+flask-sqlalchemy
+pymysql
+python-dotenv
+flask-redis
+Pillow==9.5
+flask-marshmallow
+marshmallow-sqlalchemy
+marshmallow
+pre-request
