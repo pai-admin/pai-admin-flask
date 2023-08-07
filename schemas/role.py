@@ -7,4 +7,4 @@ class RoleSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Role
         include_fk = True
-        exclude = ["del_flag"]
+        exclude = ["delFlag"]

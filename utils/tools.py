@@ -4,7 +4,10 @@ import random
 import string
 import time
 import uuid
+from flask import request, current_app
+from core import redis_client
 from core.mysql import ma
+from models import Account
 
 
 class Tools(object):
@@ -43,3 +46,14 @@ class Tools(object):
         common_schema = schema(many=isinstance(data, list))
         output = common_schema.dump(data)
         return json.dumps(output, ensure_ascii=False)
+
+    @classmethod
+    def get_account(cls, req: request, ca: current_app):
+        token = req.headers.get('Authorization')
+        if not token:
+            return None
+        _str = redis_client.get(ca.config.get("TOKEN_KEY") + token)
+        if _str is None:
+            return None
+        dic = json.loads(str(_str, "utf-8"))
+        return Account(accountId=dic["accountId"], username=dic['username'])

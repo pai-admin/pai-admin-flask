@@ -7,4 +7,4 @@ class MenuSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Menu
         include_fk = True
-        exclude = ["del_flag"]
+        exclude = ["delFlag"]
