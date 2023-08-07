@@ -7,4 +7,4 @@ class DeptSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Dept
         include_fk = True
-        exclude = ["del_flag"]
+        exclude = ["delFlag"]

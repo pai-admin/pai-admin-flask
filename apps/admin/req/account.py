@@ -7,3 +7,12 @@ loginReq = {
     "verifyCode": Rule(type=str, required=True),
     "verifyId": Rule(type=str, required=True)
 }
+
+# 查看日志
+logReq = {
+    "page": Rule(type=int, required=True),
+    "limit": Rule(type=int, required=True),
+    "startTime": Rule(type=str, required=False, location=["args"]),
+    "endTime": Rule(type=str, required=False, location=["args"]),
+    "title": Rule(type=str, required=False, location=["args"])
+}

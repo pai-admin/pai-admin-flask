@@ -1,5 +1,4 @@
 from utils import Tools
-from flask import jsonify
 
 
 class Response(object):
@@ -13,7 +12,7 @@ class Response(object):
             _r["data"] = data
         if count is not None:
             _r["count"] = count
-        return jsonify(_r)
+        return _r
 
     @classmethod
     def success(cls, msg, data=None, count=None):

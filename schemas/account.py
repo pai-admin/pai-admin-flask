@@ -7,4 +7,4 @@ class AccountSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Account
         include_fk = True
-        exclude = ["del_flag", "salt", "password"]
+        exclude = ["delFlag", "salt", "password"]

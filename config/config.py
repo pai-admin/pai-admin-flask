@@ -17,3 +17,8 @@ class Config:
     REDIS_URL = os.getenv("REDIS_URL")
     # 是否显示SQL
     SQLALCHEMY_ECHO = DEBUG
+    # json中文不编码
+    JSON_AS_ASCII = False
+    # 请求参数 pre-request
+    PRE_FUZZY = True
+    PRE_SKIP_FILTER = False

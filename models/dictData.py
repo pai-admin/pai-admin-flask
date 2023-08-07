@@ -5,7 +5,7 @@ from core import db
 class DictData(db.Model):
     __tablename__ = 'lea_dict_data'
     dataId = db.Column("data_id", db.Integer, primary_key=True, comment="字典ID")
-    typeId = db.Column("type_id", db.Integer, comment="上级ID")
+    typeId = db.Column("type_id", db.Integer, db.ForeignKey("lea_dict_type.role_id"), comment="上级ID")
     name = db.Column(db.String(20), comment="项名称")
     content = db.Column(db.String(255), comment="键值")
     rank = db.Column(db.Integer, comment="排序")

@@ -1,1 +1,1 @@
-from .account import loginReq
+from .account import loginReq, logReq
