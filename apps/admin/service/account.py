@@ -5,7 +5,7 @@ from models import Account, Menu, RoleMenu, AccountRole, Dept, Role
 from utils import Captcha, Tools
 from core.redis import redis_client
 from flask import current_app, request
-from schemas import AccountSchema
+from schemas import AccountSchema, AccountLogSchema
 from apps.admin.req import loginReq
 from models import AccountLog
 
@@ -133,5 +133,36 @@ def logout():
 
 
 def get_log(params):
-    print(params)
     return Response.success("qeq", [])
+
+
+def edit_info(accountId, params):
+    res = Account.query.filter_by(accountId=accountId).update({Account.avatar: params['avatar']})
+    db.session.commit()
+    if not res:
+        return Response.fail("修改失败")
+    return Response.success("修改成功")
+
+
+def edit_pwd(accountId, params):
+    # 校验原密码
+    account = Account.query.filter_by(accountId=accountId, delFlag=0).first()
+    if account is None:
+        Response.fail("账号不存在或已被删除")
+    if account.password != Tools.make_md5(params['oldPassword'] + account.salt):
+        return Response.fail("原密码错误")
+    salt = Tools.random_str(6)
+    res = Account.query.filter_by(accountId=accountId).update(
+        {Account.password: Tools.make_md5(params['newPassword'] + salt), Account.salt: salt})
+    db.session.commit()
+    if not res:
+        return Response.fail("修改失败")
+    return Response.success("修改成功")
+
+
+# 个人日志
+def my_log(accountId):
+    data, count = AccountLog.query.filter_by(accountId=accountId).order_by(AccountLog.logId.desc()).with_entities(
+        AccountLog.logId, AccountLog.createTime, AccountLog.title, AccountLog.code, AccountLog.ip,
+        AccountLog.ua).page_json(AccountLogSchema)
+    return Response.success("日志列表", data, count)

@@ -16,3 +16,20 @@ logReq = {
     "endTime": Rule(type=str, required=False, location=["args"]),
     "title": Rule(type=str, required=False, location=["args"])
 }
+
+# 修改信息
+editInfoReq = {
+    "avatar": Rule(type=str, required=False),
+}
+
+# 修改密码
+editPwdReq = {
+    "oldPassword": Rule(type=str, required=False),
+    "newPassword": Rule(type=str, required=False),
+}
+
+# 个人日志
+myLogReq = {
+    "page": Rule(type=int, required=True),
+    "limit": Rule(type=int, required=True),
+}

@@ -19,14 +19,12 @@ def code():
 
 @AdminAuth(name="账号信息", needAuth=False)
 def info():
-    # 获取登录信息
     ac = Tools.get_account(request, current_app)
     return account.info(ac.accountId)
 
 
 @AdminAuth(name="菜单权限", needAuth=False)
 def auth():
-    # 获取登录信息
     ac = Tools.get_account(request, current_app)
     return account.get_auth(ac.accountId)
 
@@ -41,3 +39,23 @@ def logout():
 @pre.catch(get=req.logReq)
 def get_log(params):
     return account.get_log(params)
+
+
+@AdminAuth(name="修改信息", needAuth=False)
+@pre.catch(post=req.editInfoReq)
+def edit_info(params):
+    ac = Tools.get_account(request, current_app)
+    return account.edit_info(ac.accountId, params)
+
+
+@AdminAuth(name="修改密码", needAuth=False)
+@pre.catch(post=req.editPwdReq)
+def edit_pwd(params):
+    ac = Tools.get_account(request, current_app)
+    return account.edit_pwd(ac.accountId, params)
+
+
+@AdminAuth(name="修改密码", needAuth=False)
+def my_log():
+    ac = Tools.get_account(request, current_app)
+    return account.my_log(ac.accountId)

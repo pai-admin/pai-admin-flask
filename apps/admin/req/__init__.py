@@ -1,1 +1,1 @@
-from .account import loginReq, logReq
+from .account import loginReq, logReq, editInfoReq, editPwdReq, myLogReq
