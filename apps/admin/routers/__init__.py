@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-from . import account
+from . import account, common
 
 
 def init_route(bp: Blueprint) -> None:
@@ -24,3 +24,5 @@ def init_route(bp: Blueprint) -> None:
     bp.add_url_rule("/log/list", methods=["GET"], endpoint="get_log", view_func=account.get_log)
     # 删除日志
     bp.add_url_rule("/log/del", methods=["DELETE"], endpoint="del_log", view_func=account.login)
+    # 文件上传
+    bp.add_url_rule("/upload/file", methods=["POST"], endpoint="upload", view_func=common.upload)
